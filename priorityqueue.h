@@ -1,0 +1,81 @@
+class node
+{
+public:
+int key;
+node *lchild;
+node *rchild;
+};
+node *root=NULL;
+class minqueue
+{
+public:
+void insert(int x)
+{
+node *n=new node;
+n->key=x;
+node *temp=root;
+if(root==NULL)
+{
+root=n;
+n->lchild=NULL;
+n->rchild=NULL;
+}
+else
+{
+while(true)
+{
+if(x>temp->key)
+{
+if(temp->rchild==NULL)
+{
+temp->rchild=n;
+n->lchild=NULL;
+n->rchild=NULL;
+break;
+}
+else
+{
+temp=temp->rchild;
+}
+}
+else
+{
+if(temp->lchild==NULL)
+{
+temp->lchild=n;
+n->lchild=NULL;
+n->rchild=NULL;
+break;
+}
+else
+{
+temp=temp->lchild;
+}}
+}}}
+int extractmin(node *root)
+{
+node *temp=new node;
+temp=root;
+if(temp->lchild==NULL)
+{
+int x=temp->key;
+root=temp->rchild;
+delete temp;
+return x;
+}
+else
+{
+node *temp1=new node;
+temp1=root->lchild;
+while(temp1->lchild!=NULL)
+{
+temp=temp->lchild;
+temp1=temp1->lchild;
+}
+int x=temp1->key;
+delete temp1;
+temp->lchild=NULL;
+return x;
+}
+}
+};
